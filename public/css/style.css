@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    color: #667eea;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#userBalance {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Auth Section */
+.auth-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.auth-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.btn-primary,
+.btn-buy,
+.btn-sell,
+.btn-logout {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+}
+
+.btn-buy {
+    background: #28a745;
+    color: white;
+}
+
+.btn-buy:hover {
+    background: #218838;
+}
+
+.btn-sell {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-sell:hover {
+    background: #c82333;
+}
+
+.btn-logout {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-logout:hover {
+    background: #5a6268;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.9em;
+    min-height: 20px;
+}
+
+/* Trading Section */
+.trading-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.market-section,
+.trading-interface,
+.portfolio-section,
+.history-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.market-section h2,
+.trading-interface h2,
+.portfolio-section h2,
+.history-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Market Grid */
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.crypto-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.crypto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.crypto-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 5px;
+}
+
+.crypto-change {
+    font-size: 0.9em;
+}
+
+.crypto-change.positive {
+    color: #28a745;
+}
+
+.crypto-change.negative {
+    color: #dc3545;
+}
+
+/* Trade Panels */
+.trade-panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.trade-panel {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.trade-panel h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.trade-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.total-display {
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Portfolio */
+.portfolio-content {
+    display: grid;
+    gap: 20px;
+}
+
+.portfolio-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.portfolio-item h4 {
+    color: #333;
+    font-size: 1.2em;
+}
+
+.portfolio-details {
+    text-align: right;
+}
+
+.portfolio-amount {
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* Trade History */
+.trade-history {
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.history-table th {
+    background: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background: #f8f9fa;
+}
+
+.trade-type-buy {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.trade-type-sell {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .trade-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .market-grid {
+        grid-template-columns: 1fr;
+    }
+}
