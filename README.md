@@ -139,14 +139,25 @@ Apex_Nexus/
 
 ## Security Features
 
-- Password encryption (ready for bcrypt integration)
+- Bcrypt password hashing (implemented)
 - JWT token-based authentication
 - Input validation and sanitization
 - Protected API endpoints
 - CORS enabled for security
 
+## Security Considerations
+
+This is a demonstration platform. For production use, consider:
+- **Rate Limiting**: Add rate limiting middleware (e.g., express-rate-limit) to prevent abuse
+- **JWT Secret**: Always set a strong JWT_SECRET environment variable in production
+- **HTTPS**: Use HTTPS in production to encrypt data in transit
+- **Input Sanitization**: Add additional input validation and sanitization
+- **Database Security**: Use parameterized queries when integrating with a database
+- **Monitoring**: Implement logging and monitoring for suspicious activities
+
 ## Future Enhancements
 
+- Rate limiting middleware for API endpoints
 - MongoDB database integration
 - Real-time price updates with WebSockets
 - Advanced charting and technical analysis

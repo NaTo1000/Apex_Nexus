@@ -1,5 +1,5 @@
-// API Base URL
-const API_URL = 'http://localhost:3000/api';
+// API Base URL - use relative path for better portability
+const API_URL = window.location.origin + '/api';
 
 // State
 let token = localStorage.getItem('token');

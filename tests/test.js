@@ -4,7 +4,7 @@
 
 const http = require('http');
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = process.env.TEST_BASE_URL || 'http://localhost:3000';
 let testToken = '';
 let testUserId = '';
 

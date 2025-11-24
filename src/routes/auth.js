@@ -4,8 +4,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dataStore = require('../utils/dataStore');
 
-// JWT Secret
+// JWT Secret - warn if using default in production
 const JWT_SECRET = process.env.JWT_SECRET || 'apex_nexus_secret_key_change_in_production';
+
+if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
+    console.warn('WARNING: Using default JWT_SECRET in production is insecure! Set JWT_SECRET environment variable.');
+}
 
 // Register
 router.post('/register', async (req, res) => {
