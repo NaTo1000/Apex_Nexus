@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth');
-const authRoutes = require('./auth');
-
-// In-memory trade storage
-const trades = [];
-let tradeIdCounter = 1;
+const dataStore = require('../utils/dataStore');
 
 // Buy crypto
 router.post('/buy', authMiddleware, async (req, res) => {
@@ -23,7 +19,7 @@ router.post('/buy', authMiddleware, async (req, res) => {
         }
 
         // Find user
-        const user = authRoutes.users.find(u => u.id === userId);
+        const user = dataStore.findUserById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -38,8 +34,7 @@ router.post('/buy', authMiddleware, async (req, res) => {
         // Execute trade
         user.balance -= total;
 
-        const trade = {
-            id: tradeIdCounter++,
+        const trade = dataStore.addTrade({
             userId,
             symbol: symbol.toUpperCase(),
             type: 'buy',
@@ -48,9 +43,7 @@ router.post('/buy', authMiddleware, async (req, res) => {
             total,
             timestamp: new Date(),
             status: 'completed'
-        };
-
-        trades.push(trade);
+        });
 
         res.json({
             message: 'Purchase successful',
@@ -78,13 +71,13 @@ router.post('/sell', authMiddleware, async (req, res) => {
         }
 
         // Find user
-        const user = authRoutes.users.find(u => u.id === userId);
+        const user = dataStore.findUserById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
         // Check if user has enough crypto
-        const userTrades = trades.filter(t => t.userId === userId && t.symbol === symbol.toUpperCase());
+        const userTrades = dataStore.getTradesByUserIdAndSymbol(userId, symbol);
         const totalBought = userTrades.filter(t => t.type === 'buy').reduce((sum, t) => sum + t.amount, 0);
         const totalSold = userTrades.filter(t => t.type === 'sell').reduce((sum, t) => sum + t.amount, 0);
         const currentHolding = totalBought - totalSold;
@@ -98,8 +91,7 @@ router.post('/sell', authMiddleware, async (req, res) => {
         // Execute trade
         user.balance += total;
 
-        const trade = {
-            id: tradeIdCounter++,
+        const trade = dataStore.addTrade({
             userId,
             symbol: symbol.toUpperCase(),
             type: 'sell',
@@ -108,9 +100,7 @@ router.post('/sell', authMiddleware, async (req, res) => {
             total,
             timestamp: new Date(),
             status: 'completed'
-        };
-
-        trades.push(trade);
+        });
 
         res.json({
             message: 'Sale successful',
@@ -126,7 +116,7 @@ router.post('/sell', authMiddleware, async (req, res) => {
 router.get('/history', authMiddleware, async (req, res) => {
     try {
         const userId = req.userId;
-        const userTrades = trades.filter(t => t.userId === userId);
+        const userTrades = dataStore.getTradesByUserId(userId);
         
         res.json({
             trades: userTrades.sort((a, b) => b.timestamp - a.timestamp)
@@ -137,4 +127,3 @@ router.get('/history', authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
-module.exports.trades = trades; // Export for other modules

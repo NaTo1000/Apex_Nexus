@@ -8,7 +8,8 @@ const authMiddleware = (req, res, next) => {
             return res.status(401).json({ error: 'No authentication token provided' });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default_secret_key');
+        const jwtSecret = process.env.JWT_SECRET || 'apex_nexus_secret_key_change_in_production';
+        const decoded = jwt.verify(token, jwtSecret);
         req.userId = decoded.userId;
         next();
     } catch (error) {

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const dataStore = require('../utils/dataStore');
 
-// In-memory user storage (simplified for demo)
-const users = [];
-let userIdCounter = 1;
+// JWT Secret
+const JWT_SECRET = process.env.JWT_SECRET || 'apex_nexus_secret_key_change_in_production';
 
 // Register
 router.post('/register', async (req, res) => {
@@ -17,27 +18,27 @@ router.post('/register', async (req, res) => {
         }
 
         // Check if user exists
-        const existingUser = users.find(u => u.email === email || u.username === username);
+        const existingUser = dataStore.findUserByEmail(email) || dataStore.findUserByUsername(username);
         if (existingUser) {
             return res.status(400).json({ error: 'User already exists' });
         }
 
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // Create user
-        const user = {
-            id: userIdCounter++,
+        const user = dataStore.addUser({
             username,
             email,
-            password, // In production, hash this
+            password: hashedPassword,
             balance: 10000,
             createdAt: new Date()
-        };
-
-        users.push(user);
+        });
 
         // Generate token
         const token = jwt.sign(
             { userId: user.id },
-            process.env.JWT_SECRET || 'default_secret_key',
+            JWT_SECRET,
             { expiresIn: '7d' }
         );
 
@@ -67,15 +68,21 @@ router.post('/login', async (req, res) => {
         }
 
         // Find user
-        const user = users.find(u => u.email === email);
-        if (!user || user.password !== password) {
+        const user = dataStore.findUserByEmail(email);
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Verify password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
         // Generate token
         const token = jwt.sign(
             { userId: user.id },
-            process.env.JWT_SECRET || 'default_secret_key',
+            JWT_SECRET,
             { expiresIn: '7d' }
         );
 
@@ -95,4 +102,3 @@ router.post('/login', async (req, res) => {
 });
 
 module.exports = router;
-module.exports.users = users; // Export for other modules

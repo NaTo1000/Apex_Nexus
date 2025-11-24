@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth');
-const authRoutes = require('./auth');
-const tradingRoutes = require('./trading');
+const dataStore = require('../utils/dataStore');
 
 // Get user portfolio
 router.get('/', authMiddleware, async (req, res) => {
@@ -10,13 +9,13 @@ router.get('/', authMiddleware, async (req, res) => {
         const userId = req.userId;
         
         // Find user
-        const user = authRoutes.users.find(u => u.id === userId);
+        const user = dataStore.findUserById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
         // Calculate holdings
-        const userTrades = tradingRoutes.trades.filter(t => t.userId === userId);
+        const userTrades = dataStore.getTradesByUserId(userId);
         const holdings = {};
 
         userTrades.forEach(trade => {
@@ -29,8 +28,10 @@ router.get('/', authMiddleware, async (req, res) => {
                 holdings[trade.symbol].totalCost += trade.total;
                 holdings[trade.symbol].trades += 1;
             } else if (trade.type === 'sell') {
+                const currentAmount = holdings[trade.symbol].amount;
+                const avgPrice = currentAmount > 0 ? holdings[trade.symbol].totalCost / currentAmount : 0;
                 holdings[trade.symbol].amount -= trade.amount;
-                holdings[trade.symbol].totalCost -= trade.total;
+                holdings[trade.symbol].totalCost -= (trade.amount * avgPrice);
             }
         });
 
@@ -58,7 +59,7 @@ router.get('/balance', authMiddleware, async (req, res) => {
     try {
         const userId = req.userId;
         
-        const user = authRoutes.users.find(u => u.id === userId);
+        const user = dataStore.findUserById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
