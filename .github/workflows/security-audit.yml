@@ -13,6 +13,8 @@ jobs:
   dependency-audit:
     name: Audit Dependencies
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     strategy:
       matrix:
@@ -62,6 +64,8 @@ jobs:
   secret-scanning:
     name: Scan for Secrets
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
@@ -81,6 +85,8 @@ jobs:
     name: Container Security Scan
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' || github.event_name == 'push'
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
@@ -99,6 +105,8 @@ jobs:
   license-check:
     name: License Compliance Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
