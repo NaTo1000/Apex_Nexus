@@ -1,0 +1,112 @@
+name: "Security Audit"
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Weekly security audit every Monday at 3 AM UTC
+    - cron: '0 3 * * 1'
+
+jobs:
+  dependency-audit:
+    name: Audit Dependencies
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        # Add package managers as needed
+        package-manager: [npm, pip]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Node.js (for npm)
+      if: matrix.package-manager == 'npm'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: NPM Audit
+      if: matrix.package-manager == 'npm'
+      run: |
+        if [ -f "package.json" ]; then
+          npm audit --audit-level=moderate
+        else
+          echo "No package.json found, skipping npm audit"
+        fi
+      continue-on-error: true
+    
+    - name: Set up Python (for pip)
+      if: matrix.package-manager == 'pip'
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install Safety
+      if: matrix.package-manager == 'pip'
+      run: pip install safety
+    
+    - name: Python Safety Check
+      if: matrix.package-manager == 'pip'
+      run: |
+        if [ -f "requirements.txt" ]; then
+          safety check --file=requirements.txt
+        else
+          echo "No requirements.txt found, skipping safety check"
+        fi
+      continue-on-error: true
+
+  secret-scanning:
+    name: Scan for Secrets
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: TruffleHog Secret Scan
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
+        extra_args: --only-verified
+
+  container-scan:
+    name: Container Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Run Trivy vulnerability scanner
+      if: always()
+      run: |
+        if [ -f "Dockerfile" ]; then
+          docker run --rm -v $(pwd):/scan aquasec/trivy:latest fs --severity HIGH,CRITICAL /scan
+        else
+          echo "No Dockerfile found, skipping container scan"
+        fi
+      continue-on-error: true
+
+  license-check:
+    name: License Compliance Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Check License Compliance
+      run: |
+        echo "License compliance check placeholder"
+        echo "Implement license scanning based on project language"
+        # Add license scanning tools as project grows
+      continue-on-error: true
