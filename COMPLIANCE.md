@@ -401,14 +401,29 @@ Apex_Nexus, as a cryptocurrency trading platform, must comply with various regul
 
 ## Updates and Maintenance
 
+**Responsibility**: Chief Compliance Officer (CCO) or designated compliance team member
+
 This compliance documentation must be reviewed and updated:
 
-- **Monthly**: Regulatory news monitoring and assessment
+- **Monthly**: CCO monitors regulatory news and assesses impact
 - **Quarterly**: Comprehensive policy review for regulatory changes (March, June, September, December)
-- **Immediately**: When significant regulations change or new regulations are introduced
+- **Immediately**: When significant regulations change (see definition below)
 - **Annually**: Complete compliance program review with external audit
 
-**Emergency Update Process**: When regulations change significantly (e.g., new cryptocurrency law passed), convene compliance team within 48 hours to assess impact and update documentation within 2 weeks.
+**Significant Regulatory Change Definition**:
+- New laws or regulations affecting cryptocurrency exchanges
+- Changes to AML/KYC requirements
+- New data protection regulations
+- Licensing or registration requirement changes
+- Changes affecting existing business operations or services
+- Regulatory enforcement actions in the industry that indicate policy shifts
+
+**Emergency Update Process**: When regulations change significantly:
+1. CCO convenes compliance team within 48 hours
+2. Impact assessment completed within 1 week
+3. Documentation updated within 2 weeks
+4. Implementation plan created within 30 days
+5. All stakeholders notified of changes
 
 ---
 

@@ -420,7 +420,17 @@ Apex_Nexus Security Team
 - Technical Lead: [Contact information to be populated and kept in secure location]
 - Communications Lead: [Contact information to be populated and kept in secure location]
 
-**Note**: Actual contact information including phone numbers and email addresses must be maintained in a separate, secure document accessible only to authorized personnel. Update this information quarterly and whenever team members change.
+**Note**: Actual contact information including phone numbers and email addresses must be maintained in a separate, secure document accessible only to authorized personnel. 
+
+**Recommended Storage**: 
+- Encrypted password manager (e.g., 1Password, LastPass Enterprise)
+- Secure internal wiki with access controls
+- Encrypted document on secure file share
+
+**Update Requirements**:
+- Review and update quarterly
+- Immediate update when team members change
+- Verify contact methods work during incident response drills
 
 **External Contacts**:
 - Legal Counsel: [To be populated]

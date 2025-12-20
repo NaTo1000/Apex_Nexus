@@ -342,7 +342,15 @@ This checklist ensures comprehensive security audits are conducted regularly for
 ## Audit Sign-off
 
 **Auditor**: ___________________  
-**Auditor Qualifications**: ___________________ (Required: Security certification such as CISSP, CISM, or equivalent experience)  
+**Auditor Qualifications**: ___________________ 
+
+**Required**: 
+- Security certification such as CISSP, CISM, CISA, CEH, or OSCP
+- **OR** Minimum 5 years of hands-on security experience in:
+  - Application security and secure coding practices
+  - Cryptocurrency/blockchain security (preferred)
+  - Security architecture and threat modeling
+  - Security testing and vulnerability assessment  
 **Date**: ___________________  
 **Audit Type**: ___________________  
 

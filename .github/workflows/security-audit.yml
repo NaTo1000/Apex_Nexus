@@ -54,7 +54,7 @@ jobs:
       run: |
         if [ -f "requirements.txt" ]; then
           # Fail on high and critical vulnerabilities
-          safety check --file=requirements.txt --continue-on-error --output text || exit 1
+          safety check --file=requirements.txt || exit 1
         else
           echo "No requirements.txt found, skipping safety check"
         fi
