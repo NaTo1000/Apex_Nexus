@@ -28,11 +28,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Always create PRs for security updates
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch"]
-    # Allow security updates immediately
+    # Security updates are always created regardless of grouping
+    # Allow all dependency types including security updates
     allow:
       - dependency-type: "all"
 

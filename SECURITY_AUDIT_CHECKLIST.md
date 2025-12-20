@@ -342,10 +342,20 @@ This checklist ensures comprehensive security audits are conducted regularly for
 ## Audit Sign-off
 
 **Auditor**: ___________________  
+**Auditor Qualifications**: ___________________ (Required: Security certification such as CISSP, CISM, or equivalent experience)  
 **Date**: ___________________  
 **Audit Type**: ___________________  
-**Status**: [ ] Pass [ ] Pass with conditions [ ] Fail  
+
+**Status**: 
+- [ ] Pass - No critical issues found
+- [ ] Pass with conditions - Minor issues found, remediation plan required within 30 days
+- [ ] Fail - Critical issues found, immediate remediation required
+
 **Next Audit Date**: ___________________  
+
+**Critical Issues Found**: ___________________  
+**Remediation Required**: ___________________  
+**Remediation Deadline**: ___________________  
 
 **Notes**:
 _____________________________________________

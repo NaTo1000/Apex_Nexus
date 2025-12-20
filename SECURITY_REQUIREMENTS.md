@@ -10,6 +10,20 @@ This document defines the security requirements for Apex_Nexus, a cryptocurrency
 
 These requirements MUST be implemented and cannot be bypassed:
 
+**Definition**: Critical Security Requirements are security controls that, if absent or incorrectly implemented, would directly result in:
+- Unauthorized access to user funds or private keys
+- Exposure of sensitive user data (passwords, private keys, financial information)
+- Ability to execute unauthorized transactions
+- Complete system compromise
+
+**Change Process for Critical Requirements**:
+1. Proposal must be submitted by security team member
+2. Impact assessment and risk analysis required
+3. Approval needed from Chief Information Security Officer (CISO)
+4. Board notification for requirements affecting financial controls
+5. All changes must be documented with justification
+6. Implementation timeline not to exceed 90 days
+
 #### 1. Authentication & Authorization
 
 **REQ-AUTH-001**: Multi-Factor Authentication
@@ -260,12 +274,14 @@ These requirements MUST be implemented and cannot be bypassed:
 
 In rare cases where security requirements cannot be met:
 
-1. Document the exception request
-2. Provide risk assessment
+1. Document the exception request with detailed justification
+2. Provide comprehensive risk assessment
 3. Propose compensating controls
-4. Obtain approval from security team
-5. Document temporary waiver with expiration date
+4. Obtain approval from security team (must approve within 5 business days)
+5. Document temporary waiver with expiration date (maximum 90 days)
 6. Track exceptions and ensure timely remediation
+7. Review all exceptions monthly
+8. Extensions require re-approval with updated risk assessment
 
 ## Training Requirements
 

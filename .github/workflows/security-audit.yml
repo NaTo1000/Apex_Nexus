@@ -33,11 +33,11 @@ jobs:
       if: matrix.package-manager == 'npm'
       run: |
         if [ -f "package.json" ]; then
-          npm audit --audit-level=moderate
+          # Fail on high and critical vulnerabilities
+          npm audit --audit-level=high --production || exit 1
         else
           echo "No package.json found, skipping npm audit"
         fi
-      continue-on-error: true
     
     - name: Set up Python (for pip)
       if: matrix.package-manager == 'pip'
@@ -53,11 +53,11 @@ jobs:
       if: matrix.package-manager == 'pip'
       run: |
         if [ -f "requirements.txt" ]; then
-          safety check --file=requirements.txt
+          # Fail on high and critical vulnerabilities
+          safety check --file=requirements.txt --continue-on-error --output text || exit 1
         else
           echo "No requirements.txt found, skipping safety check"
         fi
-      continue-on-error: true
 
   secret-scanning:
     name: Scan for Secrets

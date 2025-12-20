@@ -555,9 +555,11 @@ When reviewing code, check for:
 
 If you discover a security vulnerability:
 1. **Do NOT** open a public issue
-2. Email the maintainers privately
+2. Email the maintainers privately (see SECURITY.md for contact details)
 3. Provide detailed information
 4. Allow time for remediation
+
+For full vulnerability reporting procedures, see the [Security Policy](SECURITY.md).
 
 ---
 

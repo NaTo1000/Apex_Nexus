@@ -21,15 +21,19 @@ This document outlines security best practices for developing and consuming APIs
 **Implementation Example**:
 ```python
 import secrets
-import hashlib
+import bcrypt
 
 def generate_api_key():
     """Generate a secure API key"""
     return secrets.token_urlsafe(32)
 
 def hash_api_key(api_key):
-    """Hash API key for storage"""
-    return hashlib.sha256(api_key.encode()).hexdigest()
+    """Hash API key for storage using bcrypt"""
+    return bcrypt.hashpw(api_key.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def verify_api_key(api_key, hashed_key):
+    """Verify API key against stored hash"""
+    return bcrypt.checkpw(api_key.encode('utf-8'), hashed_key.encode('utf-8'))
 ```
 
 ### OAuth 2.0 / JWT

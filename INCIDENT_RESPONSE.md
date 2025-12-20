@@ -415,16 +415,18 @@ Apex_Nexus Security Team
 ### Emergency Contacts
 
 **Incident Response Team**:
-- Incident Commander: [Phone] [Email]
-- Security Lead: [Phone] [Email]
-- Technical Lead: [Phone] [Email]
-- Communications Lead: [Phone] [Email]
+- Incident Commander: [Contact information to be populated and kept in secure location]
+- Security Lead: [Contact information to be populated and kept in secure location]
+- Technical Lead: [Contact information to be populated and kept in secure location]
+- Communications Lead: [Contact information to be populated and kept in secure location]
+
+**Note**: Actual contact information including phone numbers and email addresses must be maintained in a separate, secure document accessible only to authorized personnel. Update this information quarterly and whenever team members change.
 
 **External Contacts**:
-- Legal Counsel: [Phone] [Email]
-- PR/Communications: [Phone] [Email]
-- Law Enforcement: [Phone]
-- Security Vendor: [Phone] [Email]
+- Legal Counsel: [To be populated]
+- PR/Communications: [To be populated]
+- Law Enforcement: Local emergency services and FBI Cyber Division
+- Security Vendor: [To be populated]
 
 ### Escalation Path
 
