@@ -1,0 +1,5 @@
+dist
+.next
+out
+coverage
+node_modules

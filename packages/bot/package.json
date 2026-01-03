@@ -1,0 +1,29 @@
+{
+  "name": "@apex-nexus/bot",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "apex-bot": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/cli.ts",
+    "build": "tsup src/cli.ts --format esm --sourcemap --clean",
+    "start": "node dist/cli.js",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@apex-nexus/shared": "workspace:*",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
