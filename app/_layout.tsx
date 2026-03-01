@@ -17,6 +17,8 @@ import {
 import type { EdgeInsets, Metrics, Rect } from "react-native-safe-area-context";
 
 import { trpc, createTRPCClient } from "@/lib/trpc";
+import { LibraryProvider } from "@/lib/store/library-context";
+import { PlayerProvider } from "@/lib/store/player-context";
 import { initManusRuntime, subscribeSafeAreaInsets } from "@/lib/_core/manus-runtime";
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -80,6 +82,8 @@ export default function RootLayout() {
 
   const content = (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <LibraryProvider>
+      <PlayerProvider>
       <trpc.Provider client={trpcClient} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
           {/* Default to hiding native headers so raw route segments don't appear (e.g. "(tabs)", "products/[id]"). */}
@@ -88,10 +92,19 @@ export default function RootLayout() {
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="oauth/callback" />
+            <Stack.Screen name="track/[id]" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="mastering/[id]" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="dj-session" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="mixer" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="settings" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="dj-mixer" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="collab" options={{ presentation: "fullScreenModal" }} />
           </Stack>
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
         </QueryClientProvider>
       </trpc.Provider>
+      </PlayerProvider>
+      </LibraryProvider>
     </GestureHandlerRootView>
   );
 
