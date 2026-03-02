@@ -79,6 +79,35 @@ const MAPPING = {
   "lock.fill": "lock",
   "wifi": "wifi",
   "antenna.radiowaves.left.and.right": "cell-tower",
+  // New features
+  "video.fill": "videocam",
+  "globe": "public",
+  "plus.circle": "add-circle-outline",
+  "trash": "delete-outline",
+  "sparkles": "auto-awesome",
+  "film": "movie",
+  "creditcard.fill": "credit-card",
+  "checkmark.seal.fill": "verified",
+  "building.2.fill": "business",
+  "robot.fill": "smart-toy",
+  "cpu": "memory",
+  "wand.and.stars": "auto-fix-high",
+  "chart.bar.fill": "bar-chart",
+  "arrow.triangle.2.circlepath": "sync",
+  "square.and.pencil": "edit-note",
+  "bubble.left.fill": "chat-bubble",
+  "xmark.circle": "cancel",
+  "checkmark": "check",
+  // Settings screen icons
+  "envelope.fill": "email",
+  "info.circle.fill": "info",
+  "moon.fill": "dark-mode",
+  "questionmark.circle.fill": "help",
+  "speaker.wave.3.fill": "volume-up",
+  // Additional utility
+  "arrow.down.circle.fill": "download",
+  "tray.and.arrow.down.fill": "inbox",
+  "music.quarternote.3": "music-note",
 } as unknown as IconMapping;
 
 /**

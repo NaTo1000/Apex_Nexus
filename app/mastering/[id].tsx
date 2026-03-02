@@ -12,6 +12,10 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { GlassCard } from "@/components/ui/glass-card";
+import { NeonText } from "@/components/ui/neon-text";
+import { AIAssistantButton, AIModeHeaderBadge } from "@/components/ai-assistant";
+import { useAssistant } from "@/lib/store/assistant-context";
 import { useLibrary } from "@/lib/store/library-context";
 
 // ─── DSP Parameter Types ──────────────────────────────────────────────────────
@@ -121,6 +125,9 @@ export default function MasteringScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { tracks, updateTrack } = useLibrary();
+  const { setCurrentScreen } = useAssistant();
+
+  React.useEffect(() => { setCurrentScreen("mastering/[id]"); }, [setCurrentScreen]);
   const track = tracks.find((t) => t.id === id);
 
   const [mode, setMode] = useState<"ai" | "manual">("ai");

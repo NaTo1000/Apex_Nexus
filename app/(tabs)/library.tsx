@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -11,12 +11,15 @@ import {
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { GlassCard } from "@/components/ui/glass-card";
+import { NeonText } from "@/components/ui/neon-text";
 import { TrackCard } from "@/components/track-card";
 import { MiniPlayer } from "@/components/mini-player";
+import { AIAssistantButton, AIModeHeaderBadge } from "@/components/ai-assistant";
 import { useLibrary } from "@/lib/store/library-context";
 import { usePlayer } from "@/lib/store/player-context";
+import { useAssistant } from "@/lib/store/assistant-context";
 import { Track, AudioFormat } from "@/lib/store/library-store";
-
 type FilterType = "All" | AudioFormat | "Mastered" | "Studio HD";
 const FILTERS: FilterType[] = ["All", "Studio HD", "WAV_HD", "WAV", "MP3", "Mastered"];
 const FILTER_LABELS: Record<FilterType, string> = {
@@ -36,10 +39,13 @@ export default function LibraryScreen() {
   const router = useRouter();
   const { tracks, loading, deleteTrack } = useLibrary();
   const { currentTrack } = usePlayer();
+  const { setCurrentScreen } = useAssistant();
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
   const [sort, setSort] = useState<SortType>("date");
   const [showSort, setShowSort] = useState(false);
+
+  useEffect(() => { setCurrentScreen("library"); }, [setCurrentScreen]);
 
   const filtered = useMemo(() => {
     let result = tracks;
@@ -207,6 +213,7 @@ export default function LibraryScreen() {
         )}
       </View>
 
+      <AIAssistantButton />
       <MiniPlayer />
     </ScreenContainer>
   );

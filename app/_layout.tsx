@@ -19,6 +19,8 @@ import type { EdgeInsets, Metrics, Rect } from "react-native-safe-area-context";
 import { trpc, createTRPCClient } from "@/lib/trpc";
 import { LibraryProvider } from "@/lib/store/library-context";
 import { PlayerProvider } from "@/lib/store/player-context";
+import { AssistantProvider } from "@/lib/store/assistant-context";
+import { AIAssistantPanel } from "@/components/ai-assistant";
 import { initManusRuntime, subscribeSafeAreaInsets } from "@/lib/_core/manus-runtime";
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -82,6 +84,7 @@ export default function RootLayout() {
 
   const content = (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <AssistantProvider>
       <LibraryProvider>
       <PlayerProvider>
       <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -99,12 +102,19 @@ export default function RootLayout() {
             <Stack.Screen name="settings" options={{ presentation: "fullScreenModal" }} />
             <Stack.Screen name="dj-mixer" options={{ presentation: "fullScreenModal" }} />
             <Stack.Screen name="collab" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="distribution" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="payments" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="lyricist" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="video-generator" options={{ presentation: "fullScreenModal" }} />
+            <Stack.Screen name="recording-studio" options={{ presentation: "fullScreenModal" }} />
           </Stack>
+          <AIAssistantPanel />
           <StatusBar style="light" />
         </QueryClientProvider>
       </trpc.Provider>
       </PlayerProvider>
       </LibraryProvider>
+      </AssistantProvider>
     </GestureHandlerRootView>
   );
 

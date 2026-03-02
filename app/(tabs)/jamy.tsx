@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,10 @@ import {
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { GlassCard } from "@/components/ui/glass-card";
+import { NeonText } from "@/components/ui/neon-text";
+import { AIAssistantButton } from "@/components/ai-assistant";
+import { useAssistant } from "@/lib/store/assistant-context";
 
 // ─── Data Types ───────────────────────────────────────────────────────────────
 
@@ -115,6 +119,9 @@ const DEMO_PARTICIPANTS: SessionParticipant[] = [
 
 export default function JamyScreen() {
   const router = useRouter();
+  const { setCurrentScreen } = useAssistant();
+
+  useEffect(() => { setCurrentScreen("jamy"); }, [setCurrentScreen]);
 
   const [inputSource, setInputSource] = useState("Guitar (Adapter)");
   const [inputGain, setInputGain] = useState(70);
@@ -578,6 +585,7 @@ export default function JamyScreen() {
           )}
         </View>
       </ScrollView>
+      <AIAssistantButton />
     </ScreenContainer>
   );
 }

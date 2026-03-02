@@ -107,3 +107,106 @@
 - [x] Unit tests for formatDuration, formatFileSize, formatSampleRate, getQualityLabel
 - [x] Track type structure validation
 - [x] Audio quality standards validation (96kHz/24-bit, LUFS targets)
+
+## Distribution Hub
+- [x] Distribution Hub screen with 6 platform tiles (Spotify, YouTube, Apple Music, SoundCloud, Beatport, Facebook)
+- [x] Platform connection status (connected / not connected)
+- [x] One-time fee pricing model display
+- [x] Single song distribution: $12 one-time + 10% royalty
+- [x] 10-song album distribution: $45 one-time + 10% royalty
+- [x] Double album distribution: $70 one-time + 10% royalty
+- [x] Select which platforms to distribute to
+- [x] Distribution status tracker (submitted, processing, live, rejected)
+- [x] Royalty earnings dashboard per platform
+
+## Payments & Membership
+- [x] Pricing screen with all tiers clearly displayed
+- [x] $20/week membership (full access: Jamy, Collab, DJ Booth, recording)
+- [x] Single song distribution: $12 one-time
+- [x] 10-song album: $45 one-time
+- [x] Double album: $70 one-time
+- [x] $3/song recording with ownership certificate
+- [x] $23 ownership bundle (recording + ownership cert)
+- [x] Stripe payment integration (payment intents, subscriptions)
+- [x] Payment history screen
+- [x] Active subscription status display
+- [x] Ownership certificate generation per track
+
+## AI Lyricist Booth
+- [x] AI Lyricist Booth screen
+- [x] Song structure selector (Verse/Chorus/Bridge, AABA, Through-composed)
+- [x] Genre/mood/theme input
+- [x] AI generates full song lyrics using Gemini/Claude API
+- [x] Section-by-section display (Verse 1, Pre-Chorus, Chorus, Verse 2, Bridge, Outro)
+- [x] Edit/regenerate individual sections
+- [x] Rhyme scheme selector (ABAB, AABB, ABCB, free verse)
+- [x] Collab vocal tracks — invite collaborators to record specific sections
+- [x] Export lyrics as PDF or share
+- [x] Save lyrics to track in library
+
+## Video Clip Generator
+- [x] Video Clip Generator screen
+- [x] Select track from library
+- [x] Visual style selector (Cinematic, Lyric video, Abstract, Performance, Animated)
+- [x] Scene/mood prompt input
+- [x] AI generates video concept and scene breakdown
+- [x] Colour palette and visual theme selector
+- [x] Generate storyboard frames
+- [x] Export video concept as PDF
+- [x] Link video to track in library
+
+## Recording Studio
+- [x] Recording Studio screen
+- [x] Multi-track recording interface (up to 8 tracks)
+- [x] Record via device microphone
+- [x] Track naming and colour coding
+- [x] Per-track volume, mute, solo
+- [x] Basic punch-in/punch-out recording
+- [x] Playback with metronome
+- [x] Save session to library
+- [x] $3/song ownership model with certificate
+- [x] $23 ownership bundle option at save
+- [x] Track ownership certificate display (artist name, track title, date, unique ID)
+
+## 3D Premium UI Design System
+- [x] GlassCard component — frosted glass with neon border glow and depth shadow
+- [x] NeonText component — glowing text with colour-matched shadow
+- [x] 3D Knob component — rotary knob with specular highlight and value arc
+- [x] VU Meter component — animated level bars with peak hold
+- [x] Animated waveform visualiser component
+- [x] Premium tab bar with 3D active glow state
+- [x] Cinematic gradient backgrounds per screen
+- [x] Depth elevation tokens (surface layers 1–5)
+
+## AI Assistant (DROPAi Personal AI)
+- [x] Floating AI assistant button (persistent on all screens)
+- [x] AI assistant slide-up panel with chat interface
+- [x] Min mode — passive suggestions, user controls all settings
+- [x] Max mode — AI recommends and pre-fills all settings, user approves
+- [x] Full Auto mode — AI autonomously runs mastering, routing, and full production pipeline
+- [x] AI mode selector (Min / Max / Full Auto) in assistant panel
+- [x] Context-aware suggestions per screen (mastering, jamy, lyricist, distribution, studio)
+- [x] AI mode indicator badge in all screen headers
+- [x] Sandboxed — uses built-in server LLM only, no external doc access
+- [x] Conversation history per session stored in AsyncStorage
+- [x] AI assistant context provider (global state)
+- [x] Quick action chips in assistant panel (e.g. "Master this track", "Write a verse", "Start Jamy session")
+
+## AI Internet Pipeline (Compute + Web Access)
+- [x] Server-side web search endpoint (Google/Bing search API via server proxy)
+- [x] AI can fetch music industry news, trends, chart data, licensing info
+- [x] AI can research artist names, genres, music theory references
+- [x] AI can pull real-time streaming platform royalty rates
+- [x] AI can look up music production techniques and references
+- [x] Hard lockout: AI cannot access /admin, /payments, /stripe, /db, /users endpoints
+- [x] Hard lockout: AI cannot modify library, tracks, or user data directly
+- [x] Hard lockout: AI cannot trigger financial transactions
+- [x] All AI internet requests logged server-side with timestamp and query
+- [x] Rate limiting on AI web search (max 20 requests/minute per session)
+- [x] AI responses clearly labelled with source (web search vs. built-in knowledge)
+
+## Bug Fixes & Polish (Round 2)
+- [x] Fix DJ Mixer deck overlap on portrait mobile — rebuild as vertically stacked layout
+- [x] Fine detail UI polish — sharper typography, better card depth, spacing consistency
+- [x] Audit all onPress handlers — no dead ends, add Coming Soon sheets for OAuth integrations
+- [x] Daily automated polish schedule (cron job)
