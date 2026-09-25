@@ -8,11 +8,15 @@ import {
   TextInput,
   Alert,
   Switch,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useLibrary } from "@/lib/store/library-context";
+import { useAuth } from "@/hooks/use-auth";
+
+const nato1000Avatar = require("@/assets/images/nato1000-avatar.jpg");
 
 const INSTRUMENT_OPTIONS = [
   "Guitar", "Bass", "Drums", "Keys/Piano", "Vocals",
@@ -35,8 +39,9 @@ const QUALITY_SETTINGS = [
 export default function ProfileScreen() {
   const router = useRouter();
   const { tracks } = useLibrary();
+  const { user, logout } = useAuth();
 
-  const [displayName, setDisplayName] = useState("DROPAi Artist");
+  const [displayName, setDisplayName] = useState("Nato1000");
   const [bio, setBio] = useState("Independent artist. Dropping heat since day one.");
   const [selectedInstruments, setSelectedInstruments] = useState<string[]>(["Guitar"]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>(["Rock", "Electronic"]);
@@ -79,7 +84,7 @@ export default function ProfileScreen() {
           <View style={styles.heroGradient} />
           <View style={styles.heroContent}>
             <View style={styles.avatar}>
-              <IconSymbol name="person.fill" size={36} color="#C41E3A" />
+              <Image source={nato1000Avatar} style={styles.avatarImage} accessibilityLabel="Nato1000 illustrated profile avatar" />
             </View>
             {editing ? (
               <TextInput
@@ -92,6 +97,9 @@ export default function ProfileScreen() {
             ) : (
               <Text style={styles.displayName}>{displayName}</Text>
             )}
+            <Text style={styles.accountIdentity}>
+              {user?.name || user?.email || "Apex Nexus account"}
+            </Text>
             <Text style={styles.roleText}>{selectedRole}</Text>
             <View style={styles.genreTagsRow}>
               {selectedGenres.slice(0, 3).map((g) => (
@@ -264,7 +272,7 @@ export default function ProfileScreen() {
             onPress={() =>
               Alert.alert("Sign Out", "Sign out of DROPAi?", [
                 { text: "Cancel", style: "cancel" },
-                { text: "Sign Out", style: "destructive", onPress: () => {} },
+                { text: "Sign Out", style: "destructive", onPress: async () => { await logout(); router.replace("/login"); } },
               ])
             }
           >
@@ -326,7 +334,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A0A0E",
     alignItems: "center", justifyContent: "center",
     borderWidth: 2, borderColor: "#C41E3A",
+    overflow: "hidden",
   },
+  avatarImage: { width: "100%", height: "100%" },
+  accountIdentity: { color: "#758093", fontSize: 11, maxWidth: "90%" },
   displayName: { color: "#F5F5F5", fontSize: 22, fontWeight: "800" },
   nameInput: {
     color: "#F5F5F5", fontSize: 22, fontWeight: "800",

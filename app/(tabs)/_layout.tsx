@@ -1,16 +1,28 @@
 import { Tabs } from "expo-router";
+import { Redirect } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Platform, View } from "react-native";
+import { ActivityIndicator, Platform, View } from "react-native";
 
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColors } from "@/hooks/use-colors";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function TabLayout() {
+  const { loading, isAuthenticated } = useAuth();
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const bottomPadding = Platform.OS === "web" ? 12 : Math.max(insets.bottom, 8);
   const tabBarHeight = 60 + bottomPadding;
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#080808" }}>
+        <ActivityIndicator size="large" color="#59B9FF" />
+      </View>
+    );
+  }
+  if (!isAuthenticated) return <Redirect href="/login" />;
 
   return (
     <Tabs
